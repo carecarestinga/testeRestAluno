@@ -4,12 +4,16 @@ import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.br.CPF;
+
+import br.edu.ifrs.restinga.ds.carlossoares.enuns.TipoDisciplinas;
 
 @Entity
 public class Aluno {
@@ -23,6 +27,9 @@ public class Aluno {
 	private String cpf;
 	@ElementCollection
 	private List<String> disciplinas;
+	
+	@Enumerated(EnumType.STRING)
+	private TipoDisciplinas tipoDisciplinas;
 	
 	public Aluno() {
 	}
@@ -59,6 +66,8 @@ public class Aluno {
 		this.disciplinas = disciplinas;
 	}
 
-	
+	public TipoDisciplinas getTipoDisciplinas() {
+		return tipoDisciplinas;
+	}
 	
 }
