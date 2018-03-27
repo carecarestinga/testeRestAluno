@@ -1,45 +1,51 @@
 package br.edu.ifrs.restinga.ds.carlossoares.model;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.Date;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CPF;
-
-import br.edu.ifrs.restinga.ds.carlossoares.enuns.TipoDisciplinas;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Aluno {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@NotNull(message = "O nome nao pode ser nulo")
+	private Long codigo;
+	
+	@NotEmpty(message = "Nome é obrigatório")
+	@Size(max = 60, message = "O Nome não pode conter mais de 60 caracteres")
 	private String nome;
-	@CPF(message = " O CPF é obrigatorio")
+	
+	@NotNull(message = "Date de Nascimento é obrigatória")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
+	
+	@CPF(message = "Cpf é Inválido")
 	private String cpf;
-	@ElementCollection
-	private List<String> disciplinas;
 	
 	@Enumerated(EnumType.STRING)
-	private TipoDisciplinas tipoDisciplinas;
-	
-	public Aluno() {
+	private TipoDisciplinas disciplinas;
+
+	public Long getCodigo() {
+		return codigo;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getNome() {
@@ -50,6 +56,14 @@ public class Aluno {
 		this.nome = nome;
 	}
 
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}
@@ -58,16 +72,41 @@ public class Aluno {
 		this.cpf = cpf;
 	}
 
-	public List<String> getDisciplinas() {
+	public TipoDisciplinas getDisciplinas() {
 		return disciplinas;
 	}
 
-	public void setDisciplinas(List<String> disciplinas) {
+	public void setDisciplinas(TipoDisciplinas disciplinas) {
 		this.disciplinas = disciplinas;
 	}
-
-	public TipoDisciplinas getTipoDisciplinas() {
-		return tipoDisciplinas;
-	}
 	
+//	public boolean isPendente() {
+//		return StatusTitulo.PENDENTE.equals(this.status);
+//	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Aluno other = (Aluno) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
+	}
+
 }

@@ -1,7 +1,7 @@
-package br.edu.ifrs.restinga.ds.carlossoares.enuns;
+package br.edu.ifrs.restinga.ds.carlossoares.model;
 
 public enum TipoDisciplinas {
-	
+
 	PORTUGUES("Portugês"), 
 	MATEMATICA("Matemática"), 
 	INGLES("Inglês"), 
@@ -17,5 +17,5 @@ public enum TipoDisciplinas {
 	public String getDescricao() {
 		return descricao;
 	}
-
+	
 }

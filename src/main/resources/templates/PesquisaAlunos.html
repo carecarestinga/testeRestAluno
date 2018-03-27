@@ -5,15 +5,15 @@
     layout:decorator="LayoutPadrao">
     
 <head>
-	<title>Pesquisa de Alunos</title>
+	<title>Pesquisa de títulos</title>
 </head>
 
 <section layout:fragment="conteudo">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="clearfix">
-	   			<h1 class="panel-title aw-titulo-panel">Pesquisa de Alunos</h1>
-	   			<a class="btn btn-link aw-link-panel" href="/alunos/novo">Novo Aluno</a>
+	   			<h1 class="panel-title aw-aluno-panel">Pesquisa de Alunos</h1>
+	   			<a class="btn btn-primary aw-link-panel" href="/alunos/novo">Novo Aluno</a>
 	   		</div>
 	   	</div>
 	   	
@@ -21,21 +21,22 @@
 	   		<table class="table table-bordered table-striped">
 	   			<thead>
 	   				<tr>
-	   					<th class="text-center col-md-1">#</th>
-	   					<th>Nome</th>
-	   					<th class="text-right col-md-2">Cpf</th>
+	   					<th class="text-center col-md-1">Id</th>
+	   					<th class="text-center col-md-3">Nome</th>
+	   					<th class="text-center col-md-2">Data de Nascimento</th>
+	   					<th class="text-center col-md-2">CPF</th>
 	   					<th class="text-center col-md-2">Disciplinas</th>
 	   					<th class="col-md-1"></th>
 	   				</tr>
 	   			</thead>
 	   			<tbody>
 	   				<tr th:each="aluno : ${alunos}">
-	   					<td class="text-center" th:text="${aluno.id}">1</td>
-	   					<td th:text="${aluno.nome}"></td>
-	   					<td class="text-right" th:text="|R$ ${{aluno.cpf}}|"></td>
-	   								<td class="text-center">
-	   						<span class="label" th:text="${aluno.tipoDisciplinas.descricao}" ></span>
-	   					</td>
+	   					<td class="text-center" th:text="${aluno.codigo}">1</td>
+	   					<td class="text-left" th:text="${aluno.nome}"></td>
+	   					<td class="text-center" th:text="${{aluno.dataNascimento}}"></td>
+	   					<td class="text-center" th:text=" ${{aluno.cpf}}"></td>
+	   					<td class="text-center" th:text="${{aluno.disciplinas}}"></td>
+	   	
 	   					<td class="text-center">
 	   						
 	   					</td>
